@@ -1,0 +1,48 @@
+# Resume check only. Not a thesis run.
+
+seed: 42
+
+data:
+  brset_image_root: "C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos"
+  mbrset_image_root: "C:/data/brset_mbrset/mbrset/1.0/images"
+  image_root: "C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos"
+  cache_root: "C:/data/cache_256"
+  image_col: image_id
+  label_col: DR_ICDR
+  patient_col: patient_id
+  train_csv: data/splits/brset_train_diabetic.csv
+  val_csv: data/splits/brset_val_diabetic.csv
+  test_csv: data/splits/brset_test_published.csv
+  restrict_diabetic_only: true
+  binary_label: true
+  max_train_rows: 100
+  max_val_rows: 20
+  max_test_rows: 20
+  subgroup_columns:
+    - patient_age
+    - patient_sex
+
+model:
+  name: timm
+  backbone: vit_base_patch16_224
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  pretrained: false
+
+train:
+  batch_size: 8
+  grad_accum_steps: 1
+  amp: true
+  num_workers: 0
+  epochs: 2
+  learning_rate: 1.0e-5
+  early_stop_patience: 8
+
+eval:
+  bootstrap_samples: 5
+
+output:
+  dir: results/smoke_resume
+
+experiment: exp1

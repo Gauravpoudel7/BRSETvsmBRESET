@@ -1,0 +1,42 @@
+# Stand-in experiment: APTOS (train) → MESSIDOR-2 (external test)
+# Plumbing validation only — NOT thesis results
+
+seed: 42
+
+data:
+  train_csv: data/standin/aptos_train.csv
+  val_csv: data/standin/aptos_val.csv
+  test_csv: data/standin/messidor_test.csv
+  image_col: image_path
+  label_col: label
+  patient_col: patient_id
+  image_root: data/standin/images
+  binary_label: true
+  # Subgroup columns for code testing (real names when on BRSET/mBRSET)
+  subgroup_columns:
+    - patient_age
+    - patient_sex
+
+model:
+  name: timm  # timm | retfound | dinov3
+  backbone: vit_base_patch16_224
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  retfound_checkpoint: null
+  pretrained: true
+
+train:
+  batch_size: 8
+  num_workers: 2
+  epochs: 2
+  learning_rate: 1.0e-4
+  early_stop_patience: 3
+
+eval:
+  bootstrap_samples: 200
+
+output:
+  dir: results/standin
+
+experiment: exp1  # exp1 = train on train_csv; exp2 = load checkpoint, test on test_csv only

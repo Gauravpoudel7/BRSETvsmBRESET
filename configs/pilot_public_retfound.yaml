@@ -1,0 +1,40 @@
+# Public pilot with RETFound weights (when available)
+# Copy to pilot_public_retfound.yaml or pass via env
+
+seed: 42
+
+data:
+  train_csv: data/pilot/aptos_train.csv
+  val_csv: data/pilot/aptos_val.csv
+  test_csv: data/pilot/messidor_test.csv
+  image_col: image_path
+  label_col: label
+  patient_col: patient_id
+  image_root: data/pilot/images
+  binary_label: false
+  subgroup_columns: []
+
+model:
+  name: retfound
+  backbone: vit_large_patch16_224
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  retfound_checkpoint: weights/RETFound_cfp_weights.pth
+  dinov3_checkpoint: null
+  pretrained: false
+
+train:
+  batch_size: 4
+  num_workers: 2
+  epochs: 10
+  learning_rate: 1.0e-5
+  early_stop_patience: 4
+
+eval:
+  bootstrap_samples: 500
+
+output:
+  dir: results/pilot/retfound
+
+experiment: exp1

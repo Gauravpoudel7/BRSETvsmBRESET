@@ -1,0 +1,53 @@
+# Pipeline check only. Numbers from this run are not thesis results.
+
+seed: 42
+
+data:
+  brset_image_root: "C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos"
+  mbrset_image_root: "C:/data/brset_mbrset/mbrset/1.0/images"
+  image_root: "C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos"
+  image_col: image_id
+  label_col: DR_ICDR
+  patient_col: patient_id
+  train_csv: data/splits/brset_train_diabetic.csv
+  val_csv: data/splits/brset_val_diabetic.csv
+  test_csv: data/splits/brset_test_published.csv
+  external_test_csv: data/splits/mbrset_test_published.csv
+  restrict_diabetic_only: true
+  binary_label: true
+  max_train_rows: 200
+  max_val_rows: 40
+  max_test_rows: 40
+  max_external_rows: 40
+  also_eval_external: true
+  subgroup_columns:
+    - patient_age
+    - patient_sex
+  mbrset_subgroup_columns:
+    - patient_age
+    - patient_sex
+    - educational_level
+    - insurance
+
+model:
+  name: timm
+  backbone: vit_base_patch16_224
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  pretrained: false
+
+train:
+  batch_size: 8
+  num_workers: 0
+  epochs: 1
+  learning_rate: 1.0e-5
+  early_stop_patience: 8
+
+eval:
+  bootstrap_samples: 20
+
+output:
+  dir: results/smoke_brset_mbrset
+
+experiment: exp1

@@ -1,0 +1,74 @@
+﻿RETFound load: loaded=294 missing=0 unexpected=0 encoder_keys=294 path=C:\Users\gaura\OneDrive\Desktop\BRSETvsmBRSET\weights\RETFound_cfp_weights.pth
+{
+  "checkpoint": "results\\brset_mbrset_retfound_crop_exp1\\best_model.pt",
+  "mbrset_auroc": 0.620978696232658,
+  "score_summary": {
+    "brset_val_median_prob_pos": 0.993310809135437,
+    "brset_val_median_prob_neg": 0.00642123818397522,
+    "mbrset_median_prob_pos": 0.06797537207603455,
+    "mbrset_median_prob_neg": 0.052688512951135635
+  },
+  "default_0.5_on_all_mbrset": {
+    "threshold": 0.5,
+    "n": 979,
+    "sensitivity": 0.04782608695652174,
+    "specificity": 0.9986648865153538,
+    "balanced_accuracy": 0.5232454867359377,
+    "accuracy": 0.7752808988764045,
+    "tp": 11,
+    "fn": 219,
+    "tn": 748,
+    "fp": 1
+  },
+  "brset_val_youden_on_all_mbrset": {
+    "threshold": 0.1390918791294098,
+    "n": 979,
+    "sensitivity": 0.24782608695652175,
+    "specificity": 0.8718291054739653,
+    "balanced_accuracy": 0.5598275962152435,
+    "accuracy": 0.7252298263534218,
+    "tp": 57,
+    "fn": 173,
+    "tn": 653,
+    "fp": 96
+  },
+  "mbrset_calibrated_on_held_out": {
+    "cal_fraction_of_patients": 0.2,
+    "repeats": 200,
+    "threshold": {
+      "mean": 0.07373319841921329,
+      "ci_low": 0.029524844139814377,
+      "ci_high": 0.24993008971214303
+    },
+    "sensitivity": {
+      "mean": 0.5812692917640873,
+      "ci_low": 0.1009962504359958,
+      "ci_high": 0.9239256825075834
+    },
+    "specificity": {
+      "mean": 0.5524168964272461,
+      "ci_low": 0.18164673088458416,
+      "ci_high": 0.9816218430380033
+    },
+    "balanced_accuracy": {
+      "mean": 0.5668430940956667,
+      "ci_low": 0.5364182516465817,
+      "ci_high": 0.5931972935900004
+    },
+    "accuracy": {
+      "mean": 0.5590768268002491,
+      "ci_low": 0.3489808917197452,
+      "ci_high": 0.7687468702748286
+    },
+    "auroc_eval": {
+      "mean": 0.6203651045442332,
+      "ci_low": 0.5920255091129846,
+      "ci_high": 0.6504362487790174
+    },
+    "default_sensitivity_eval": {
+      "mean": 0.04759191838551412,
+      "ci_low": 0.03225375194065896,
+      "ci_high": 0.062155720338983055
+    }
+  }
+}

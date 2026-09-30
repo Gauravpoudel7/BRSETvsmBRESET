@@ -1,0 +1,44 @@
+﻿Device: cuda
+RETFound load: loaded=294 missing=0 unexpected=0 encoder_keys=294 path=C:\Users\gaura\OneDrive\Desktop\BRSETvsmBRSET\weights\RETFound_cfp_weights.pth
+python.exe : 
+At C:\Users\gaura\OneDrive\Desktop\BRSETvsmBRSET\scripts\run_queue.ps1:6 char:1
++ & $py scripts\run_experiment.py --config configs\brset_mbrset_retfoun ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+eval:   0%|          | 0/62 [00:00<?, ?it/s]
+eval:   2%|1         | 1/62 [00:13<13:15, 13.04s/it]
+eval:   5%|4         | 3/62 [00:13<03:23,  3.45s/it]
+eval:   8%|8         | 5/62 [00:13<01:38,  1.72s/it]
+eval:  11%|#1        | 7/62 [00:13<00:56,  1.03s/it]
+eval:  15%|#4        | 9/62 [00:13<00:35,  1.47it/s]
+eval:  18%|#7        | 11/62 [00:13<00:24,  2.11it/s]
+eval:  21%|##        | 13/62 [00:14<00:17,  2.87it/s]
+eval:  24%|##4       | 15/62 [00:14<00:12,  3.76it/s]
+eval:  27%|##7       | 17/62 [00:14<00:09,  4.72it/s]
+eval:  31%|###       | 19/62 [00:14<00:07,  5.71it/s]
+eval:  34%|###3      | 21/62 [00:14<00:06,  6.66it/s]
+eval:  37%|###7      | 23/62 [00:15<00:05,  7.51it/s]
+eval:  40%|####      | 25/62 [00:15<00:04,  8.24it/s]
+eval:  44%|####3     | 27/62 [00:15<00:03,  8.85it/s]
+eval:  47%|####6     | 29/62 [00:15<00:03,  9.32it/s]
+eval:  50%|#####     | 31/62 [00:15<00:03,  9.70it/s]
+eval:  53%|#####3    | 33/62 [00:16<00:02,  9.93it/s]
+eval:  56%|#####6    | 35/62 [00:16<00:02, 10.11it/s]
+eval:  60%|#####9    | 37/62 [00:16<00:02, 10.29it/s]
+eval:  63%|######2   | 39/62 [00:16<00:02, 10.38it/s]
+eval:  66%|######6   | 41/62 [00:16<00:02, 10.48it/s]
+eval:  69%|######9   | 43/62 [00:16<00:01, 10.49it/s]
+eval:  73%|#######2  | 45/62 [00:17<00:01, 10.52it/s]
+eval:  76%|#######5  | 47/62 [00:17<00:01, 10.56it/s]
+eval:  79%|#######9  | 49/62 [00:17<00:01, 10.55it/s]
+eval:  82%|########2 | 51/62 [00:17<00:01, 10.62it/s]
+eval:  85%|########5 | 53/62 [00:17<00:00, 10.56it/s]
+eval:  89%|########8 | 55/62 [00:18<00:00, 10.62it/s]
+eval:  92%|#########1| 57/62 [00:18<00:00, 10.61it/s]
+eval:  95%|#########5| 59/62 [00:18<00:00, 10.62it/s]
+eval:  98%|#########8| 61/62 [00:18<00:00, 10.63it/s]
+Test metrics (brset_mbrset_retfound_crop_exp2): {'n': 979, 'accuracy': 0.7752808988764045, 'auroc': 0.6210483543275092, 'sensitivity': 0.04782608695652174, 'specificity': 0.9986648865153538}
+Results saved to results\brset_mbrset_retfound_crop_exp2
+                                                     

@@ -1,0 +1,30 @@
+{
+  "overall_auroc": {
+    "auroc_mean": 0.645783092725133,
+    "ci_low": 0.5940373418562377,
+    "ci_high": 0.6976304811699049,
+    "n_bootstrap": 1000
+  },
+  "subgroup_gaps": {
+    "patient_age": {
+      "gap_mean": 0.016932512452505547,
+      "ci_low": 0.0,
+      "ci_high": 0.032191088312748195
+    },
+    "patient_sex": {
+      "gap_mean": 0.0327824571736474,
+      "ci_low": 0.0,
+      "ci_high": 0.06232406306777072
+    },
+    "educational_level": {
+      "gap_mean": 0.06022407512013246,
+      "ci_low": 0.0,
+      "ci_high": 0.09246376811594204
+    },
+    "insurance": {
+      "gap_mean": 0.09030782158110219,
+      "ci_low": 0.0,
+      "ci_high": 0.17168787372833116
+    }
+  }
+}

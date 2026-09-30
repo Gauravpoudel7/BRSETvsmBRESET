@@ -1,0 +1,2 @@
+epoch=1 train_loss=0.7360 val_auroc=0.7292 time_s=21.0
+epoch=2 train_loss=0.6637 val_auroc=0.6042 time_s=20.5

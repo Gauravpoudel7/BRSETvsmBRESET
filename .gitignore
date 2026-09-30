@@ -1,0 +1,22 @@
+.venv/
+.venv312/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/raw/
+data/splits/*.csv
+!data/splits/split_summary.csv
+weights/
+*.pt
+*.pth
+.reference/
+
+# Kept off GitHub: public pilot images (2.5 GB), patient-level outputs, restricted images
+.cursor/
+data/pilot/
+data/standin/
+results/**/predictions_*.csv
+results/crop_check.png
+results/smoke_*/
+results/inspect_labels.json
+

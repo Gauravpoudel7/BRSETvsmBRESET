@@ -1,0 +1,73 @@
+{
+  "checkpoint": "results\\brset_mbrset_retfound_exp1\\best_model.pt",
+  "mbrset_auroc": 0.6460672200615314,
+  "score_summary": {
+    "brset_val_median_prob_pos": 0.9881370663642883,
+    "brset_val_median_prob_neg": 0.007105423603206873,
+    "mbrset_median_prob_pos": 0.0674835741519928,
+    "mbrset_median_prob_neg": 0.053124409168958664
+  },
+  "default_0.5_on_all_mbrset": {
+    "threshold": 0.5,
+    "n": 979,
+    "sensitivity": 0.02608695652173913,
+    "specificity": 1.0,
+    "balanced_accuracy": 0.5130434782608696,
+    "accuracy": 0.7711950970377937,
+    "tp": 6,
+    "fn": 224,
+    "tn": 749,
+    "fp": 0
+  },
+  "brset_val_youden_on_all_mbrset": {
+    "threshold": 0.24111171066761017,
+    "n": 979,
+    "sensitivity": 0.05217391304347826,
+    "specificity": 0.9986648865153538,
+    "balanced_accuracy": 0.525419399779416,
+    "accuracy": 0.7763023493360572,
+    "tp": 12,
+    "fn": 218,
+    "tn": 748,
+    "fp": 1
+  },
+  "mbrset_calibrated_on_held_out": {
+    "cal_fraction_of_patients": 0.2,
+    "repeats": 200,
+    "threshold": {
+      "mean": 0.07226777642965317,
+      "ci_low": 0.043613205291330816,
+      "ci_high": 0.10474188327789312
+    },
+    "sensitivity": {
+      "mean": 0.46285341729117535,
+      "ci_low": 0.18553347849755034,
+      "ci_high": 0.7990962009803922
+    },
+    "specificity": {
+      "mean": 0.733760384470394,
+      "ci_low": 0.34272092816500715,
+      "ci_high": 0.9434027104677641
+    },
+    "balanced_accuracy": {
+      "mean": 0.5983069008807846,
+      "ci_low": 0.5535842889097832,
+      "ci_high": 0.6273736069168824
+    },
+    "accuracy": {
+      "mean": 0.6704213326622102,
+      "ci_low": 0.4440106129857812,
+      "ci_high": 0.7645473678013746
+    },
+    "auroc_eval": {
+      "mean": 0.6475918105293974,
+      "ci_low": 0.6232385979780746,
+      "ci_high": 0.6723729407306506
+    },
+    "default_sensitivity_eval": {
+      "mean": 0.02640926117779028,
+      "ci_low": 0.011048205937708699,
+      "ci_high": 0.03488882088943288
+    }
+  }
+}

@@ -1,0 +1,5 @@
+attribute,subgroup,n,auroc,gap_note
+patient_age,old,12,0.1875,gap=0.0903
+patient_age,young,12,0.2777777777777778,gap=0.0903
+patient_sex,female,12,0.45714285714285713,gap=0.2286
+patient_sex,male,12,0.2285714285714286,gap=0.2286

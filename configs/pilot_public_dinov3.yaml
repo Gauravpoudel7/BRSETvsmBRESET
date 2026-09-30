@@ -1,0 +1,39 @@
+# Public pilot with DINOv3 ViT-L/16
+
+seed: 42
+
+data:
+  train_csv: data/pilot/aptos_train.csv
+  val_csv: data/pilot/aptos_val.csv
+  test_csv: data/pilot/messidor_test.csv
+  image_col: image_path
+  label_col: label
+  patient_col: patient_id
+  image_root: data/pilot/images
+  binary_label: false
+  subgroup_columns: []
+
+model:
+  name: dinov3
+  backbone: vit_large_patch16_dinov3.lvd1689m
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  retfound_checkpoint: null
+  dinov3_checkpoint: null
+  pretrained: true
+
+train:
+  batch_size: 4
+  num_workers: 2
+  epochs: 10
+  learning_rate: 1.0e-5
+  early_stop_patience: 4
+
+eval:
+  bootstrap_samples: 500
+
+output:
+  dir: results/pilot/dinov3
+
+experiment: exp1
