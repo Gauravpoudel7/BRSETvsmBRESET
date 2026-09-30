@@ -1,0 +1,90 @@
+{
+  "predictions": "results\\brset_mbrset_retfound_crop_exp2\\threshold\\predictions_mbrset.csv",
+  "n": 979,
+  "age_median_cutoff": 60.0,
+  "auroc": 0.620978696232658,
+  "auroc_bootstrap": {
+    "auroc_mean": 0.6203144335708015,
+    "ci_low": 0.5629480197831557,
+    "ci_high": 0.6771261053900958,
+    "n_bootstrap": 1000
+  },
+  "equity_scaled_auc": 0.6067955289950568,
+  "min_subgroup_auroc": 0.5903901474289823,
+  "es_auc_per_attribute": {
+    "educational_level": 0.6151945479433405,
+    "insurance": 0.6110507504726765,
+    "patient_age": 0.5856561480734095,
+    "patient_sex": 0.6152806694908008
+  },
+  "subgroup_gaps": {
+    "patient_age": {
+      "gap": 0.060312776149360814,
+      "ci_low": 0.003826089877064723,
+      "ci_high": 0.1806064430545506,
+      "best_group": "young",
+      "worst_group": "old",
+      "diff_best_minus_worst_ci": [
+        -0.061288934889068294,
+        0.1806064430545506
+      ],
+      "frac_rounds_worst_group_not_worse": 0.148,
+      "subgroup_auroc": {
+        "old": 0.5903901474289823,
+        "young": 0.6507029235783431
+      },
+      "n_bootstrap": 1000
+    },
+    "patient_sex": {
+      "gap": 0.009260857726235416,
+      "ci_low": 0.0017152891915767023,
+      "ci_high": 0.131226285702473,
+      "best_group": "female",
+      "worst_group": "male",
+      "diff_best_minus_worst_ci": [
+        -0.10912393303829936,
+        0.12189981169351308
+      ],
+      "frac_rounds_worst_group_not_worse": 0.441,
+      "subgroup_auroc": {
+        "female": 0.6262013381995135,
+        "male": 0.6169404804732781
+      },
+      "n_bootstrap": 1000
+    },
+    "educational_level": {
+      "gap": 0.009402144912783239,
+      "ci_low": 0.003142321624278341,
+      "ci_high": 0.17394557443938688,
+      "best_group": "illiterate",
+      "worst_group": "literate",
+      "diff_best_minus_worst_ci": [
+        -0.14453826269192183,
+        0.16483040080458833
+      ],
+      "frac_rounds_worst_group_not_worse": 0.449,
+      "subgroup_auroc": {
+        "illiterate": 0.6286956521739131,
+        "literate": 0.6192935072611299
+      },
+      "n_bootstrap": 1000
+    },
+    "insurance": {
+      "gap": 0.016247334206367925,
+      "ci_low": 0.0032437296560066165,
+      "ci_high": 0.23628176602798848,
+      "best_group": "insured",
+      "worst_group": "uninsured",
+      "diff_best_minus_worst_ci": [
+        -0.19865080488757492,
+        0.22868868755648947
+      ],
+      "frac_rounds_worst_group_not_worse": 0.4819639278557114,
+      "subgroup_auroc": {
+        "insured": 0.6352459016393442,
+        "uninsured": 0.6189985674329763
+      },
+      "n_bootstrap": 998
+    }
+  }
+}

@@ -27,7 +27,7 @@ from src.data import (
 )
 from src.evaluate import collect_predictions, compute_metrics_from_logits
 from src.models import build_model
-from src.subgroups import equity_scaled_auc, parse_age, subgroup_auroc_table
+from src.subgroups import assign_groups, equity_scaled_auc, min_subgroup_auroc, parse_age, subgroup_auroc_table
 from src.train import evaluate_loader, fit
 
 
@@ -226,9 +226,19 @@ def main() -> None:
         )
         boot_gaps = {}
         if not subgroup_df.empty:
+            meta_df = pd.DataFrame(metas)
             for attr in subgroup_df["attribute"].unique():
-                boot_gaps[attr] = bootstrap_gap(subgroup_df, attr, n_samples=min(boot_n, 500))
-        overall_payload = {**test_metrics, "equity_scaled_auc": esa, "bootstrap": boot_overall}
+                inc = subgroup_df[(subgroup_df["attribute"] == attr) & subgroup_df["included"]]["subgroup"].tolist()
+                groups = assign_groups(meta_df, attr, age_median if attr in {"patient_age", "age"} else None).values
+                boot_gaps[attr] = bootstrap_gap(
+                    probs, labels, groups, patient_ids, inc, n_samples=boot_n, seed=int(cfg.get("seed", 42))
+                )
+        pred_df = pd.DataFrame({"patient_id": patient_ids if patient_ids is not None else np.arange(len(probs)),
+                                "prob": probs, "label": labels})
+        pred_df.to_csv(dest / "predictions.csv", index=False)
+        overall_payload = {**test_metrics, "equity_scaled_auc": esa,
+                           "min_subgroup_auroc": min_subgroup_auroc(subgroup_df) if not subgroup_df.empty else None,
+                           "bootstrap": boot_overall}
         (dest / "overall_metrics.json").write_text(json.dumps(overall_payload, indent=2), encoding="utf-8")
         if not subgroup_df.empty:
             subgroup_df.to_csv(dest / "subgroup_metrics.csv", index=False)

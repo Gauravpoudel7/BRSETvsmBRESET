@@ -19,4 +19,4 @@ results/**/predictions_*.csv
 results/crop_check.png
 results/smoke_*/
 results/inspect_labels.json
-
+results/**/predictions.csv
