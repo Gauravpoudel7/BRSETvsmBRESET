@@ -1,0 +1,8 @@
+{
+  "device": "cuda",
+  "batch_size": 16,
+  "experiment": "exp2",
+  "n_train": 11372,
+  "n_val": 978,
+  "n_test": 979
+}

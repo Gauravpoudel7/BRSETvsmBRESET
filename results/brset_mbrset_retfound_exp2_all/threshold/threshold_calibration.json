@@ -1,0 +1,73 @@
+{
+  "checkpoint": "results\\brset_mbrset_retfound_exp1_all\\best_model.pt",
+  "mbrset_auroc": 0.6741568468102397,
+  "score_summary": {
+    "brset_val_median_prob_pos": 0.46719902753829956,
+    "brset_val_median_prob_neg": 0.00896477047353983,
+    "mbrset_median_prob_pos": 0.14277520775794983,
+    "mbrset_median_prob_neg": 0.11930906027555466
+  },
+  "default_0.5_on_all_mbrset": {
+    "threshold": 0.5,
+    "n": 979,
+    "sensitivity": 0.0,
+    "specificity": 1.0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.7650663942798774,
+    "tp": 0,
+    "fn": 230,
+    "tn": 749,
+    "fp": 0
+  },
+  "brset_val_youden_on_all_mbrset": {
+    "threshold": 0.0564899817109108,
+    "n": 979,
+    "sensitivity": 0.9956521739130435,
+    "specificity": 0.00801068090787717,
+    "balanced_accuracy": 0.5018314274104604,
+    "accuracy": 0.24004085801838612,
+    "tp": 229,
+    "fn": 1,
+    "tn": 6,
+    "fp": 743
+  },
+  "mbrset_calibrated_on_held_out": {
+    "cal_fraction_of_patients": 0.2,
+    "repeats": 200,
+    "threshold": {
+      "mean": 0.15396862663328648,
+      "ci_low": 0.12479904498904944,
+      "ci_high": 0.18721063435077667
+    },
+    "sensitivity": {
+      "mean": 0.4404644316347005,
+      "ci_low": 0.22093409413398543,
+      "ci_high": 0.6354602272727274
+    },
+    "specificity": {
+      "mean": 0.8426012442009483,
+      "ci_low": 0.5722451412594131,
+      "ci_high": 0.9788239026575097
+    },
+    "balanced_accuracy": {
+      "mean": 0.6415328379178242,
+      "ci_low": 0.5953673105339741,
+      "ci_high": 0.6788129605483607
+    },
+    "accuracy": {
+      "mean": 0.7481915069139133,
+      "ci_low": 0.5843803180109292,
+      "ci_high": 0.8049029685699156
+    },
+    "auroc_eval": {
+      "mean": 0.6764260744441691,
+      "ci_low": 0.6412275043686004,
+      "ci_high": 0.7108810822780042
+    },
+    "default_sensitivity_eval": {
+      "mean": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    }
+  }
+}

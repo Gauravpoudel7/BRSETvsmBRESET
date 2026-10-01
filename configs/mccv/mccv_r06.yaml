@@ -1,0 +1,53 @@
+seed: 1006
+data:
+  brset_image_root: C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos
+  mbrset_image_root: C:/data/brset_mbrset/mbrset/1.0/images
+  image_root: C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos
+  cache_root: C:/data/cache_256
+  image_col: image_id
+  label_col: DR_ICDR
+  patient_col: patient_id
+  splits_dir: data/splits
+  train_csv: data/splits/mccv/train_r06.csv
+  val_csv: data/splits/mccv/val_r06.csv
+  test_csv: data/splits/mccv/test_r06.csv
+  external_test_csv: data/splits/mbrset_test_published.csv
+  restrict_diabetic_only: true
+  binary_label: true
+  subgroup_columns:
+  - patient_age
+  - patient_sex
+  mbrset_subgroup_columns:
+  - patient_age
+  - patient_sex
+  - educational_level
+  - insurance
+  also_eval_external: true
+model:
+  name: retfound
+  backbone: vit_large_patch16_224
+  image_size: 224
+  num_classes: 2
+  freeze_backbone: false
+  retfound_checkpoint: weights/RETFound_cfp_weights.pth
+  dinov3_checkpoint: weights/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+  pretrained: true
+train:
+  batch_size: 16
+  grad_accum_steps: 1
+  amp: true
+  num_workers: 4
+  epochs: 50
+  learning_rate: 1.0e-05
+  early_stop_patience: 8
+eval:
+  bootstrap_samples: 1000
+output:
+  dir: C:/data/mccv/run_r06
+experiment: exp1
+camera_control:
+  enabled: true
+  column: camera
+  groups:
+  - Canon CR
+  - NIKON NF5050

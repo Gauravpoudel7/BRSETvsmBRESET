@@ -1,0 +1,9 @@
+epoch=2 train_loss=0.1005 val_auroc=0.9543 train_s=292.8 val_s=19.3
+epoch=3 train_loss=0.0763 val_auroc=0.9429 train_s=291.5 val_s=19.5
+epoch=4 train_loss=0.0523 val_auroc=0.9525 train_s=312.8 val_s=20.5
+epoch=5 train_loss=0.0410 val_auroc=0.9411 train_s=299.1 val_s=19.1
+epoch=6 train_loss=0.0320 val_auroc=0.9377 train_s=293.9 val_s=19.2
+epoch=7 train_loss=0.0280 val_auroc=0.9256 train_s=290.9 val_s=19.2
+epoch=8 train_loss=0.0205 val_auroc=0.9428 train_s=290.8 val_s=19.2
+epoch=9 train_loss=0.0161 val_auroc=0.9278 train_s=290.9 val_s=19.4
+peak_gpu_memory_mb=6818.0

@@ -1,0 +1,44 @@
+{
+  "overall_auroc": {
+    "auroc_mean": 0.961233195632195,
+    "ci_low": 0.948057945083749,
+    "ci_high": 0.9729702991326502,
+    "n_bootstrap": 1000
+  },
+  "subgroup_gaps": {
+    "patient_age": {
+      "gap": 0.03834623970679474,
+      "ci_low": 0.011240540179305916,
+      "ci_high": 0.07239526486556205,
+      "best_group": "young",
+      "worst_group": "old",
+      "diff_best_minus_worst_ci": [
+        0.011236276561542672,
+        0.07239526486556205
+      ],
+      "frac_rounds_worst_group_not_worse": 0.003,
+      "subgroup_auroc": {
+        "old": 0.9401823328067402,
+        "young": 0.978528572513535
+      },
+      "n_bootstrap": 1000
+    },
+    "patient_sex": {
+      "gap": 0.016652161670137722,
+      "ci_low": 0.0008167544342395917,
+      "ci_high": 0.04493510946046936,
+      "best_group": "male",
+      "worst_group": "female",
+      "diff_best_minus_worst_ci": [
+        -0.008109990636470998,
+        0.04493510946046936
+      ],
+      "frac_rounds_worst_group_not_worse": 0.091,
+      "subgroup_auroc": {
+        "female": 0.9509412807676262,
+        "male": 0.9675934424377639
+      },
+      "n_bootstrap": 1000
+    }
+  }
+}

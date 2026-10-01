@@ -1,0 +1,15 @@
+{
+  "n": 979,
+  "accuracy": 0.7650663942798774,
+  "auroc": 0.6741771637545713,
+  "sensitivity": 0.0,
+  "specificity": 1.0,
+  "equity_scaled_auc": 0.6134791264317525,
+  "min_subgroup_auroc": 0.451844262295082,
+  "bootstrap": {
+    "auroc_mean": 0.6737647345776298,
+    "ci_low": 0.6070111498297477,
+    "ci_high": 0.7410749653248107,
+    "n_bootstrap": 1000
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "overall_auroc": {
+    "auroc_mean": 0.6737647345776298,
+    "ci_low": 0.6070111498297477,
+    "ci_high": 0.7410749653248107,
+    "n_bootstrap": 1000
+  },
+  "subgroup_gaps": {
+    "patient_age": {
+      "gap": 0.07340023443117805,
+      "ci_low": 0.0038362526389425114,
+      "ci_high": 0.20030702602850747,
+      "best_group": "young",
+      "worst_group": "old",
+      "diff_best_minus_worst_ci": [
+        -0.06124499492993982,
+        0.20030702602850747
+      ],
+      "frac_rounds_worst_group_not_worse": 0.146,
+      "subgroup_auroc": {
+        "old": 0.6356526429341963,
+        "young": 0.7090528773653744
+      },
+      "n_bootstrap": 1000
+    },
+    "patient_sex": {
+      "gap": 0.08439022596021573,
+      "ci_low": 0.00549248202840243,
+      "ci_high": 0.23133394224706583,
+      "best_group": "female",
+      "worst_group": "male",
+      "diff_best_minus_worst_ci": [
+        -0.05225461611565002,
+        0.23133394224706583
+      ],
+      "frac_rounds_worst_group_not_worse": 0.11,
+      "subgroup_auroc": {
+        "female": 0.7081660583941606,
+        "male": 0.6237758324339449
+      },
+      "n_bootstrap": 1000
+    },
+    "educational_level": {
+      "gap": 0.022309415346426054,
+      "ci_low": 0.002810439319857244,
+      "ci_high": 0.19913890627894307,
+      "best_group": "literate",
+      "worst_group": "illiterate",
+      "diff_best_minus_worst_ci": [
+        -0.13737613420521552,
+        0.1984981352856411
+      ],
+      "frac_rounds_worst_group_not_worse": 0.373,
+      "subgroup_auroc": {
+        "illiterate": 0.6579710144927536,
+        "literate": 0.6802804298391797
+      },
+      "n_bootstrap": 1000
+    },
+    "insurance": {
+      "gap": 0.23761613745933508,
+      "ci_low": 0.017155475874387684,
+      "ci_high": 0.52227442358984,
+      "best_group": "uninsured",
+      "worst_group": "insured",
+      "diff_best_minus_worst_ci": [
+        -0.10777887485257463,
+        0.52227442358984
+      ],
+      "frac_rounds_worst_group_not_worse": 0.07221664994984955,
+      "subgroup_auroc": {
+        "insured": 0.451844262295082,
+        "uninsured": 0.6894603997544171
+      },
+      "n_bootstrap": 997
+    }
+  }
+}
