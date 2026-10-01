@@ -24,3 +24,7 @@ results/**/predictions.csv
 # MCCV split files hold patient IDs + labels (restricted data); regenerate with scripts/make_mccv_splits.py
 data/splits/mccv/*.csv
 !data/splits/mccv/mccv_split_summary.csv
+
+data/splits/cohorts/
+results_audit/*.csv
+results_audit/sheets/
