@@ -1,0 +1,54 @@
+camera_control:
+  column: camera
+  enabled: true
+  groups:
+  - Canon CR
+  - NIKON NF5050
+data:
+  also_eval_external: true
+  binary_label: true
+  brset_image_root: C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos
+  cache_root: C:/data/cache_256
+  external_test_csv: data/splits/cohorts/ext_mbrset_steep.csv
+  image_col: image_id
+  image_root: C:/data/brset_mbrset/brazilian-ophthalmological/1.0.2/fundus_photos
+  label_col: DR_ICDR
+  mbrset_image_root: C:/data/brset_mbrset/mbrset/1.0/images
+  mbrset_subgroup_columns:
+  - patient_age
+  - patient_sex
+  - educational_level
+  - insurance
+  patient_col: patient_id
+  restrict_diabetic_only: true
+  splits_dir: data/splits/cohorts
+  subgroup_columns:
+  - patient_age
+  - patient_sex
+  test_csv: data/splits/cohorts/test_shuf_f1.csv
+  train_csv: data/splits/cohorts/train_shuf_f1.csv
+  val_csv: data/splits/cohorts/val_shuf_f1.csv
+eval:
+  bootstrap_samples: 1000
+experiment: exp1
+model:
+  backbone: vit_large_patch16_224
+  dinov3_checkpoint: weights/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+  freeze_backbone: false
+  image_size: 224
+  name: retfound
+  num_classes: 2
+  pretrained: true
+  retfound_checkpoint: weights/RETFound_cfp_weights.pth
+output:
+  dir: C:/data/cohort/run_shuf_f1
+seed: 2001
+train:
+  amp: true
+  batch_size: 16
+  early_stop_patience: 8
+  save_last_checkpoint: false
+  epochs: 50
+  grad_accum_steps: 1
+  learning_rate: 1.0e-05
+  num_workers: 4

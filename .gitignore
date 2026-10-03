@@ -28,3 +28,8 @@ data/splits/mccv/*.csv
 data/splits/cohorts/
 results_audit/*.csv
 results_audit/sheets/
+
+data/splits/cohortpool/
+results_audit/
+results_audit_err.txt
+results_audit_log.txt

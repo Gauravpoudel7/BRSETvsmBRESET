@@ -189,7 +189,8 @@ def fit(
         else:
             stale += 1
 
-        save_last_checkpoint(
+        if train_cfg.get("save_last_checkpoint", True):
+          save_last_checkpoint(
             output_dir / "last_checkpoint.pt",
             {
                 "model": model.state_dict(),
