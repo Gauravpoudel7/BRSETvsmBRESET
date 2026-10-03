@@ -70,6 +70,7 @@ def make_loader(df, cfg, train: bool, image_root: str, cache_dir: str | Path | N
         transform=build_transforms(
             cfg["model"]["image_size"], train=train, fundus_crop=bool(data_cfg.get("fundus_crop", False)),
             aug=str(cfg["train"].get("augment", "basic")),
+            crop_scale_min=cfg["train"].get("crop_scale_min"),
         ),
     )
     return DataLoader(

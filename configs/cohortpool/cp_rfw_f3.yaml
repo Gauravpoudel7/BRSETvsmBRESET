@@ -55,6 +55,7 @@ train:
   save_last_checkpoint: false
   optimizer: retfound
   augment: retfound
+  crop_scale_min: 0.2
   label_smoothing: 0.1
   blr: 0.005
   layer_decay: 0.65

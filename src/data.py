@@ -135,7 +135,7 @@ class FundusCrop:
         return canvas
 
 
-def build_transforms(image_size: int = 224, train: bool = True, fundus_crop: bool = False, aug: str = "basic") -> transforms.Compose:
+def build_transforms(image_size: int = 224, train: bool = True, fundus_crop: bool = False, aug: str = "basic", crop_scale_min: float | None = None) -> transforms.Compose:
     pre = [FundusCrop()] if fundus_crop else []
     if train and aug == "retfound":
         # Same train transform as the official RETFound main_finetune.py (timm create_transform,
@@ -144,6 +144,8 @@ def build_transforms(image_size: int = 224, train: bool = True, fundus_crop: boo
         return transforms.Compose(pre + [create_transform(
             input_size=image_size, is_training=True, auto_augment="rand-m9-mstd0.5-inc1",
             re_prob=0.25, re_mode="pixel", re_count=1, interpolation="bicubic",
+            # crop_scale_min None keeps the timm default (0.08, 1.0); 0.2 matches RETFound pre-training crops.
+            scale=(0.08, 1.0) if crop_scale_min is None else (float(crop_scale_min), 1.0),
             mean=IMAGENET_MEAN, std=IMAGENET_STD)])
     if train:
         return transforms.Compose(
