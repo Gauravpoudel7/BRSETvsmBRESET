@@ -31,10 +31,12 @@ class TimmClassifier(nn.Module):
         pretrained: bool = True,
         freeze_backbone: bool = False,
         global_pool: str = "avg",
+        drop_path_rate: float = 0.0,
     ):
         super().__init__()
+        extra = {"drop_path_rate": drop_path_rate} if drop_path_rate > 0 else {}
         self.backbone = timm.create_model(
-            backbone, pretrained=pretrained, num_classes=0, global_pool=global_pool
+            backbone, pretrained=pretrained, num_classes=0, global_pool=global_pool, **extra
         )
         feat_dim = self.backbone.num_features
         self.head = ClassificationHead(feat_dim, num_classes)
@@ -67,7 +69,7 @@ def build_model(cfg: dict, device: torch.device) -> nn.Module:
         checkpoint = model_cfg.get("retfound_checkpoint")
         if not checkpoint:
             raise FileNotFoundError("RETFound config is missing model.retfound_checkpoint")
-        model = _load_retfound_classifier(checkpoint, num_classes, freeze)
+        model = _load_retfound_classifier(checkpoint, num_classes, freeze, float(model_cfg.get("drop_path", 0.0)))
     elif name == "dinov3":
         checkpoint = model_cfg.get("dinov3_checkpoint")
         backbone = model_cfg.get("backbone", "vit_large_patch16_dinov3.lvd1689m")
@@ -109,6 +111,7 @@ def _load_retfound_classifier(
     checkpoint_path: str | Path,
     num_classes: int,
     freeze_backbone: bool,
+    drop_path_rate: float = 0.0,
 ) -> nn.Module:
     """Load RETFound ViT-L encoder weights. Raise if the file or the match is bad."""
     path = _resolve_checkpoint(checkpoint_path)
@@ -126,6 +129,7 @@ def _load_retfound_classifier(
         pretrained=False,
         freeze_backbone=freeze_backbone,
         global_pool="token",
+        drop_path_rate=drop_path_rate,
     )
     encoder_keys = set(model.backbone.state_dict().keys())
     missing, unexpected = model.backbone.load_state_dict(state, strict=False)

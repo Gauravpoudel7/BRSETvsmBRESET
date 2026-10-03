@@ -25,18 +25,29 @@ def train_one_epoch(
     scaler: torch.amp.GradScaler | None = None,
     accum_steps: int = 1,
     use_amp: bool = False,
+    grade_weights: dict | None = None,
+    lr_sched=None,
+    epoch: int = 0,
 ) -> dict:
     model.train()
     total_loss = 0.0
     n = 0
     accum_steps = max(int(accum_steps), 1)
     optimizer.zero_grad(set_to_none=True)
-    for step, (images, labels, _) in enumerate(tqdm(loader, desc="train", leave=False)):
+    for step, (images, labels, metas) in enumerate(tqdm(loader, desc="train", leave=False)):
+        if lr_sched is not None and step % accum_steps == 0:
+            lr_sched(optimizer, epoch + step / len(loader))
         images = images.to(device)
         labels = labels.to(device)
         with torch.amp.autocast(device_type="cuda", enabled=use_amp):
             logits = model(images)
-            loss = criterion(logits, labels) / accum_steps
+            per = criterion(logits, labels)
+            if grade_weights is not None:
+                w = torch.tensor([grade_weights[int(m["DR_ICDR"])] for m in metas], device=device, dtype=per.dtype)
+                loss = (per * w).sum() / w.sum()
+            else:
+                loss = per.mean()
+            loss = loss / accum_steps
         if use_amp and scaler is not None:
             scaler.scale(loss).backward()
         else:
@@ -100,6 +111,47 @@ def save_last_checkpoint(path: Path, payload: dict) -> None:
     os.replace(temporary, path)
 
 
+def build_retfound_optimizer(model: nn.Module, train_cfg: dict):
+    """AdamW + layer-wise lr decay + warmup/half-cycle cosine, as in RETFound main_finetune.py."""
+    import math
+    eff_batch = int(train_cfg["batch_size"]) * max(int(train_cfg.get("grad_accum_steps", 1)), 1)
+    base_lr = float(train_cfg.get("blr", 5e-3)) * eff_batch / 256
+    min_lr = float(train_cfg.get("min_lr", 1e-6))
+    ld = float(train_cfg.get("layer_decay", 0.65))
+    wd = float(train_cfg.get("weight_decay", 0.05))
+    warmup = int(train_cfg.get("warmup_epochs", 10))
+    total = int(train_cfg["epochs"])
+    num_layers = len(model.backbone.blocks) + 1
+    groups = {}
+    for name, p in model.named_parameters():
+        if not p.requires_grad:
+            continue
+        short = name[len("backbone."):] if name.startswith("backbone.") else None
+        if short is not None and (short in ("cls_token", "pos_embed") or short.startswith("patch_embed")):
+            lid = 0
+        elif short is not None and short.startswith("blocks."):
+            lid = int(short.split(".")[1]) + 1
+        else:
+            lid = num_layers
+        no_wd = p.ndim == 1 or (short in ("cls_token", "pos_embed"))
+        key = (lid, no_wd)
+        if key not in groups:
+            groups[key] = {"params": [], "weight_decay": 0.0 if no_wd else wd, "lr_scale": ld ** (num_layers - lid)}
+        groups[key]["params"].append(p)
+    optimizer = torch.optim.AdamW(list(groups.values()), lr=base_lr)
+
+    def lr_sched(opt, ep: float):
+        if ep < warmup:
+            lr = base_lr * ep / warmup
+        else:
+            lr = min_lr + (base_lr - min_lr) * 0.5 * (1.0 + math.cos(math.pi * (ep - warmup) / (total - warmup)))
+        for g in opt.param_groups:
+            g["lr"] = lr * g["lr_scale"]
+
+    print(f"RETFound optimizer: base_lr={base_lr:.2e} layer_decay={ld} wd={wd} warmup={warmup} groups={len(groups)}")
+    return optimizer, lr_sched, warmup
+
+
 def fit(
     model: nn.Module,
     train_loader: DataLoader,
@@ -110,11 +162,22 @@ def fit(
     resume_path: Path | None = None,
 ) -> nn.Module:
     train_cfg = cfg["train"]
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(
-        filter(lambda p: p.requires_grad, model.parameters()),
-        lr=float(train_cfg["learning_rate"]),
-    )
+    criterion = nn.CrossEntropyLoss(reduction="none", label_smoothing=float(train_cfg.get("label_smoothing", 0.0)))
+    grade_weights = None
+    if train_cfg.get("grade_weighting") == "sqrt_inv":
+        # Square-root inverse frequency per ICDR grade (Lancet Digit Health 2026 RETFound study).
+        counts = train_loader.dataset.df["DR_ICDR"].astype(int).value_counts()
+        grade_weights = {int(g): float((counts.max() / n) ** 0.5) for g, n in counts.items()}
+        print(f"grade_weights={grade_weights} counts={counts.sort_index().to_dict()}")
+    lr_sched = None
+    warmup = 0
+    if train_cfg.get("optimizer") == "retfound":
+        optimizer, lr_sched, warmup = build_retfound_optimizer(model, train_cfg)
+    else:
+        optimizer = torch.optim.Adam(
+            filter(lambda p: p.requires_grad, model.parameters()),
+            lr=float(train_cfg["learning_rate"]),
+        )
 
     best_auroc = -1.0
     patience = int(train_cfg.get("early_stop_patience", 5))
@@ -166,6 +229,9 @@ def fit(
             scaler=scaler,
             accum_steps=accum_steps,
             use_amp=use_amp,
+            grade_weights=grade_weights,
+            lr_sched=lr_sched,
+            epoch=epoch,
         )
         train_s = time.time() - t0
         t1 = time.time()
@@ -186,7 +252,7 @@ def fit(
                 {"model": model.state_dict(), "epoch": finished_epoch, "val_auroc": best_auroc},
                 output_dir / "best_model.pt",
             )
-        else:
+        elif finished_epoch > warmup:
             stale += 1
 
         if train_cfg.get("save_last_checkpoint", True):
