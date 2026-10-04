@@ -1,0 +1,76 @@
+
+=== BRSET (pooled 5 folds, 175 patients): 81 with DR, 94 without ===
+Grades (patients): {0: 94, 1: 52, 2: 20, 3: 7, 4: 2}
+T1 baseline            patient AUROC 0.812 (95% CI 0.741-0.876)
+T2 RETFound recipe     patient AUROC 0.833 (95% CI 0.772-0.889)
+T3 recipe+weights      patient AUROC 0.832 (95% CI 0.770-0.889)
+  T2 RETFound recipe minus T1 baseline: +0.021 (95% CI -0.037 to +0.077), bootstrap p=0.445
+  T3 recipe+weights minus T1 baseline: +0.020 (95% CI -0.035 to +0.074), bootstrap p=0.447
+  T3 recipe+weights minus T2 RETFound recipe: -0.001 (95% CI -0.029 to +0.028), bootstrap p=0.952
+ -- At validation Youden cut-off --
+  T1 baseline            sensitivity 0.60, specificity 0.85; catch by grade g1 0.50, g2 0.70, g3 1.00, g4 1.00
+  T2 RETFound recipe     sensitivity 0.77, specificity 0.83; catch by grade g1 0.73, g2 0.75, g3 1.00, g4 1.00
+  T3 recipe+weights      sensitivity 0.68, specificity 0.79; catch by grade g1 0.60, g2 0.75, g3 1.00, g4 1.00
+  McNemar T2 RETFound recipe vs T1 baseline on sick patients: flagged only by first 16, only by second 3, p=0.004
+  McNemar T2 RETFound recipe vs T1 baseline on healthy patients: flagged only by first 7, only by second 5, p=0.774
+  McNemar T3 recipe+weights vs T1 baseline on sick patients: flagged only by first 9, only by second 3, p=0.146
+  McNemar T3 recipe+weights vs T1 baseline on healthy patients: flagged only by first 10, only by second 4, p=0.180
+  McNemar T3 recipe+weights vs T2 RETFound recipe on sick patients: flagged only by first 2, only by second 9, p=0.065
+  McNemar T3 recipe+weights vs T2 RETFound recipe on healthy patients: flagged only by first 6, only by second 2, p=0.289
+ -- At validation cut-off for 80% specificity --
+  T1 baseline            sensitivity 0.70, specificity 0.80; catch by grade g1 0.65, g2 0.70, g3 1.00, g4 1.00
+  T2 RETFound recipe     sensitivity 0.77, specificity 0.79; catch by grade g1 0.73, g2 0.75, g3 1.00, g4 1.00
+  T3 recipe+weights      sensitivity 0.68, specificity 0.83; catch by grade g1 0.60, g2 0.75, g3 1.00, g4 1.00
+  McNemar T2 RETFound recipe vs T1 baseline on sick patients: flagged only by first 10, only by second 5, p=0.302
+  McNemar T2 RETFound recipe vs T1 baseline on healthy patients: flagged only by first 10, only by second 9, p=1.000
+  McNemar T3 recipe+weights vs T1 baseline on sick patients: flagged only by first 7, only by second 9, p=0.804
+  McNemar T3 recipe+weights vs T1 baseline on healthy patients: flagged only by first 6, only by second 9, p=0.607
+  McNemar T3 recipe+weights vs T2 RETFound recipe on sick patients: flagged only by first 1, only by second 8, p=0.039
+  McNemar T3 recipe+weights vs T2 RETFound recipe on healthy patients: flagged only by first 3, only by second 7, p=0.344
+
+=== mBRSET ensemble (324 patients): 150 with DR, 174 without ===
+Grades (patients): {0.0: 174, 1.0: 96, 2.0: 37, 3.0: 13, 4.0: 4}
+T1 baseline            patient AUROC 0.584 (95% CI 0.520-0.646)
+T2 RETFound recipe     patient AUROC 0.692 (95% CI 0.636-0.748)
+T3 recipe+weights      patient AUROC 0.690 (95% CI 0.634-0.748)
+  T2 RETFound recipe minus T1 baseline: +0.108 (95% CI +0.046 to +0.171), bootstrap p=0.000
+  T3 recipe+weights minus T1 baseline: +0.106 (95% CI +0.046 to +0.172), bootstrap p=0.000
+  T3 recipe+weights minus T2 RETFound recipe: -0.002 (95% CI -0.015 to +0.013), bootstrap p=0.866
+ -- At validation Youden cut-off --
+  T1 baseline            sensitivity 0.02, specificity 1.00; catch by grade g1 0.00, g2 0.03, g3 0.15, g4 0.00
+  T2 RETFound recipe     sensitivity 0.33, specificity 0.89; catch by grade g1 0.15, g2 0.51, g3 1.00, g4 1.00
+  T3 recipe+weights      sensitivity 0.36, specificity 0.85; catch by grade g1 0.18, g2 0.54, g3 1.00, g4 1.00
+  McNemar T2 RETFound recipe vs T1 baseline on sick patients: flagged only by first 47, only by second 0, p=0.000
+  McNemar T2 RETFound recipe vs T1 baseline on healthy patients: flagged only by first 19, only by second 0, p=0.000
+  McNemar T3 recipe+weights vs T1 baseline on sick patients: flagged only by first 51, only by second 0, p=0.000
+  McNemar T3 recipe+weights vs T1 baseline on healthy patients: flagged only by first 26, only by second 0, p=0.000
+  McNemar T3 recipe+weights vs T2 RETFound recipe on sick patients: flagged only by first 5, only by second 1, p=0.219
+  McNemar T3 recipe+weights vs T2 RETFound recipe on healthy patients: flagged only by first 8, only by second 1, p=0.039
+ -- At validation cut-off for 80% specificity --
+  T1 baseline            sensitivity 0.10, specificity 0.95; catch by grade g1 0.04, g2 0.14, g3 0.38, g4 0.25
+  T2 RETFound recipe     sensitivity 0.39, specificity 0.86; catch by grade g1 0.21, g2 0.57, g3 1.00, g4 1.00
+  T3 recipe+weights      sensitivity 0.35, specificity 0.88; catch by grade g1 0.16, g2 0.54, g3 1.00, g4 1.00
+  McNemar T2 RETFound recipe vs T1 baseline on sick patients: flagged only by first 45, only by second 2, p=0.000
+  McNemar T2 RETFound recipe vs T1 baseline on healthy patients: flagged only by first 23, only by second 7, p=0.005
+  McNemar T3 recipe+weights vs T1 baseline on sick patients: flagged only by first 41, only by second 4, p=0.000
+  McNemar T3 recipe+weights vs T1 baseline on healthy patients: flagged only by first 20, only by second 7, p=0.019
+  McNemar T3 recipe+weights vs T2 RETFound recipe on sick patients: flagged only by first 0, only by second 6, p=0.031
+  McNemar T3 recipe+weights vs T2 RETFound recipe on healthy patients: flagged only by first 3, only by second 6, p=0.508
+
+=== Per-fold patient AUROC (BRSET test / mBRSET / validation) ===
+T1 baseline            f0: 0.829/0.633/0.878 | f1: 0.845/0.557/0.877 | f2: 0.757/0.539/0.901 | f3: 0.826/0.512/0.933 | f4: 0.980/0.593/0.881 | mean 0.847/0.567
+T2 RETFound recipe     f0: 0.872/0.688/0.913 | f1: 0.878/0.645/0.903 | f2: 0.740/0.663/0.912 | f3: 0.812/0.695/0.932 | f4: 0.971/0.677/0.883 | mean 0.855/0.673
+T3 recipe+weights      f0: 0.859/0.671/0.906 | f1: 0.888/0.684/0.908 | f2: 0.734/0.670/0.887 | f3: 0.832/0.697/0.932 | f4: 0.908/0.666/0.870 | mean 0.844/0.678
+
+=== mBRSET per-fold-model thresholded results (mean of 5 models) ===
+T1 baseline            you: sensitivity 0.23, specificity 0.80
+T1 baseline            sp80: sensitivity 0.19, specificity 0.88
+T2 RETFound recipe     you: sensitivity 0.35, specificity 0.88
+T2 RETFound recipe     sp80: sensitivity 0.44, specificity 0.79
+T3 recipe+weights      you: sensitivity 0.39, specificity 0.81
+T3 recipe+weights      sp80: sensitivity 0.35, specificity 0.87
+
+Validation cut-offs (Youden, spec80) per fold:
+T1 baseline            0.448, 0.234; 0.057, 0.262; 0.119, 0.119; 0.537, 0.234; 0.330, 0.096
+T2 RETFound recipe     0.138, 0.115; 0.398, 0.325; 0.180, 0.180; 0.201, 0.201; 0.259, 0.226
+T3 recipe+weights      0.547, 0.374; 0.548, 0.548; 0.167, 0.341; 0.313, 0.313; 0.456, 0.456
